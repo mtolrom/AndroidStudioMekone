@@ -229,4 +229,4 @@ workflows:
           requires:
             - build_release
             - test_unit
-- test_instrumented
+            - test_instrumented
