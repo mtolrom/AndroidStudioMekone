@@ -1,0 +1,2 @@
+[![CircleCI](https://circleci.com/gh/mtolrom/AndroidStudioMekone.svg?style=svg)](https://circleci.com/gh/mtolrom/AndroidStudioMekone)
+[![codecov](https://codecov.io/gh/mtolrom/AndroidStudioMekone/branch/master/graph/badge.svg)](https://codecov.io/gh/mtolrom/AndroidStudioMekone)
