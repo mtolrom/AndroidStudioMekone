@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Homework-Week1</string>
-    <string name="hello_world">Hello World!</string>
-    <string name="my_name">Tolrom, Mekone 4/08/2018</string>
-    <string name="translate_in">Translate!</string>
-    <string name="french">Bonjour!</string>
+    <string name="app_name">Week2Assignment-Mekone</string>
+
+    <string name="txt_name">Name</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_age">Age</string>
+    <string name="txt_dob">DOB</string>
+
+    <string name="edit_name" />
+    <string name="edit_email" />
+    <string name="edit_username" />
+    <string name="edit_age" />
+    <string name="edit_dob" />
+
+    <string name="btn_submit">Submit</string>
+
+    <string name="txt_author">Tolrom, Mekone 4/15/2018</string>
+
+    <string name="form_status">_status_</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome">Welcome: </string>
+    <string name="key_name">name</string>
+    <string name="key_age">age</string>
+    <string name="fix_errors">Fix Errors</string>
+    <string name="oops_errors">OOPS Errors!</string>
+    <string name="full_name">Mekone Tolrom</string>
+    <string name="s_email">sde@outlook.com</string>
+    <string name="alias">mtolrom</string>
+    <string name="d_date">2/2/1980</string>
 </resources>
