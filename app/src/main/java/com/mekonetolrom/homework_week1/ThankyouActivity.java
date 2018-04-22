@@ -33,14 +33,10 @@ public class ThankyouActivity extends AppCompatActivity {
 
     public void signUp(View View)
     {
-        try {
-            button_text = ((Button) View).getText().toString();
-            if (button_text.equals("Sign Up")) {
-                Intent it = new Intent(this, MainActivity.class);
-                startActivity(it);
-            }
-        }catch (Exception ex){
-            //
+        button_text = ((Button) View).getText().toString();
+        if (button_text.equals("Sign Up")) {
+            Intent it = new Intent(this, MainActivity.class);
+            startActivity(it);
         }
     }
 }
