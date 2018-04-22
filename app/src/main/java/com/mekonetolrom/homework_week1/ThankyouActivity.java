@@ -1,7 +1,6 @@
 package com.mekonetolrom.homework_week1;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -41,8 +40,7 @@ public class ThankyouActivity extends AppCompatActivity {
                 startActivity(it);
             }
         }catch (Exception ex){
-            textView.setText("OOps errors!");
-            textView.setTextColor(Color.RED);
+            //
         }
     }
 }
