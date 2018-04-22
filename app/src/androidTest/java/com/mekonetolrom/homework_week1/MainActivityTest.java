@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -70,5 +71,14 @@ public class MainActivityTest {
         resultData.putExtra("age", R.integer.my_age);
         Instrumentation.ActivityResult result =
                 new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
+    }
+
+    @Test
+    public void testClickButton(){
+        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_age)).perform(typeText(String.valueOf(R.integer.my_age)), closeSoftKeyboard());
+        onView(withId(R.id.id_submit)).perform(click());
+        onView(withId(R.id.tv_greeting))
+                .check(matches(withText("Welcome: Mekone Tolrom ")));
     }
 }
