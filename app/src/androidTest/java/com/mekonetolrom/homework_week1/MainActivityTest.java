@@ -17,6 +17,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasTextColor;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
@@ -80,5 +81,24 @@ public class MainActivityTest {
         onView(withId(R.id.id_submit)).perform(click());
         onView(withId(R.id.tv_greeting))
                 .check(matches(withText("Welcome: Mekone Tolrom ")));
+    }
+
+    @Test
+    public void testErrorMessage(){
+        onView(withId(R.id.id_submit)).perform(click());
+        onView(withId(R.id.error_status))
+                .check(matches(withText(R.string.oops_errors)));
+        onView(withId(R.id.error_status))
+                .check(matches(hasTextColor(R.color.colorAccent)));
+    }
+
+    @Test
+    public void testAgeNull(){
+        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.id_submit)).perform(click());
+        onView(withId(R.id.error_status))
+                .check(matches(withText(R.string.oops_errors)));
+        onView(withId(R.id.error_status))
+                .check(matches(hasTextColor(R.color.colorAccent)));
     }
 }

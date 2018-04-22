@@ -1,7 +1,6 @@
 package com.mekonetolrom.homework_week1;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -49,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(it);
                         } else {
                             err_message.setText(R.string.fix_errors);
-                            err_message.setTextColor(Color.RED);
+                            err_message.setTextColor(getColor(R.color.colorAccent));
                         }
                     }
                 }
             }
         }catch (Exception ex){
             err_message.setText(R.string.oops_errors);
-            err_message.setTextColor(Color.RED);
+            err_message.setTextColor(getColor(R.color.colorAccent));
         }
     }
 
