@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -33,5 +34,14 @@ public class ThankyouActivityTest {
     public void setsRightMessageBasedOnIntentExtra() {
         onView(withId(R.id.tv_greeting))
                 .check(matches(withText("Welcome: Mekone Tolrom ")));
+    }
+
+    @Test
+    public void goBackToMainPage(){
+        onView(withId(R.id.button2)).perform(click());
+        onView(withId(R.id.edit_name))
+                .check(matches(withText("")));
+        onView(withId(R.id.edit_age))
+                .check(matches(withText("")));
     }
 }
