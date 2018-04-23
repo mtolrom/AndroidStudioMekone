@@ -2,4 +2,5 @@
 <resources>
     <integer name="my_age">25</integer>
     <integer name="my_dob">45</integer>
+    <integer name="under_age">15</integer>
 </resources>

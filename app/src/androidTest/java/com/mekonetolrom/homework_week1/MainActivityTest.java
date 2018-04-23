@@ -101,4 +101,14 @@ public class MainActivityTest {
         onView(withId(R.id.error_status))
                 .check(matches(hasTextColor(R.color.colorAccent)));
     }
+
+    @Test
+    public void testAgeLessThanEighteen(){
+        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
+        String s = Integer.toString(R.integer.under_age);
+        onView(withId(R.id.edit_age)).perform(typeText("15"), closeSoftKeyboard());
+        onView(withId(R.id.id_submit)).perform(click());
+        onView(withId(R.id.error_status))
+                .check(matches(withText(R.string.fix_errors)));
+    }
 }
