@@ -77,7 +77,7 @@ public class MainActivityTest {
     @Test
     public void testClickButton(){
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
-        onView(withId(R.id.edit_age)).perform(typeText(String.valueOf(R.integer.my_age)), closeSoftKeyboard());
+        onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
         onView(withId(R.id.id_submit)).perform(click());
         onView(withId(R.id.tv_greeting))
                 .check(matches(withText("Welcome: Mekone Tolrom ")));

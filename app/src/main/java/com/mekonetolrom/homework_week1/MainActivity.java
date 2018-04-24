@@ -15,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText age;
     private EditText email;
     private EditText username;
-    private EditText dob;
+    //private EditText dob;
+    private EditText occupation;
+    private EditText description;
     private TextView err_message;
 
     @Override
@@ -27,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
         age = findViewById(R.id.edit_age);
         email = findViewById(R.id.edit_email);
         username = findViewById(R.id.edit_username);
-        dob = findViewById(R.id.edit_dob);
+        //dob = findViewById(R.id.edit_dob);
         err_message = findViewById(R.id.error_status);
+        occupation = findViewById(R.id.edit_occupation);
+        description = findViewById(R.id.edit_description);
     }
 
     public void createAccount(View View)
@@ -44,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
                             it.putExtra("email", email.getText().toString());
                             it.putExtra("username", username.getText().toString());
                             it.putExtra("age", age.getText().toString());
-                            it.putExtra("dob", dob.getText().toString());
+                            //it.putExtra("dob", dob.getText().toString());
+                            it.putExtra("occupation", occupation.getText().toString());
+                            it.putExtra("description", description.getText().toString());
                             startActivity(it);
                         } else {
                             err_message.setText(R.string.fix_errors);
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }catch (Exception ex){
             err_message.setText(R.string.oops_errors);
+            //err_message.setText(ex.getMessage());
             err_message.setTextColor(getColor(R.color.colorAccent));
         }
     }
