@@ -65,7 +65,7 @@ public class MainActivityTest {
     @Test
     public void enterThankyouActivityWithMessage() {
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
-        onView(withId(R.id.edit_age)).perform(typeText(String.valueOf(R.integer.my_age)), closeSoftKeyboard());
+        onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
 
         Intent resultData = new Intent();
         resultData.putExtra("name", R.string.full_name);
@@ -78,9 +78,25 @@ public class MainActivityTest {
     public void testClickButton(){
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
         onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
+        onView(withId(R.id.edit_username)).perform(typeText("mtolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_email)).perform(typeText("mtolrom@outlook.com"), closeSoftKeyboard());
+        onView(withId(R.id.edit_occupation)).perform(typeText("Engineer".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_description)).perform(typeText("Cloud Computing Engineer"), closeSoftKeyboard());
+
         onView(withId(R.id.id_submit)).perform(click());
+
         onView(withId(R.id.tv_greeting))
-                .check(matches(withText("Welcome: Mekone Tolrom ")));
+                .check(matches(withText("Name : Mekone Tolrom")));
+        onView(withId(R.id.tv_username))
+                .check(matches(withText("Username : mtolrom")));
+        onView(withId(R.id.tv_email))
+                .check(matches(withText("Email : mtolrom@outlook.com")));
+        onView(withId(R.id.tv_age))
+                .check(matches(withText("Age : 25")));
+        onView(withId(R.id.tv_occupation))
+                .check(matches(withText("Occupation : Engineer")));
+        onView(withId(R.id.tv_description))
+                .check(matches(withText("Description : Cloud Computing Engineer")));
     }
 
     @Test

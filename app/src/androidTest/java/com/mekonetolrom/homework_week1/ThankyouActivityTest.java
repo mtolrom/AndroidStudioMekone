@@ -21,11 +21,12 @@ public class ThankyouActivityTest {
         @Override
         protected Intent getActivityIntent() {
             Intent testIntent = new Intent();
-            testIntent.putExtra("name", "Mekone Tolrom");
-            testIntent.putExtra("age", R.integer.my_age);
-            testIntent.putExtra("email", R.string.s_email);
-            testIntent.putExtra("username", R.string.alias);
-            testIntent.putExtra("dob", R.string.d_date);
+            testIntent.putExtra("name", "Name : Mekone Tolrom");
+            testIntent.putExtra("age", "Age : 25");
+            testIntent.putExtra("email", "Email : sde@outlook.com");
+            testIntent.putExtra("username", "Username : mtolrom");
+            testIntent.putExtra("occupation", "Occupation : Engineer");
+            testIntent.putExtra("description", "Description : Cloud Computing Engineer");
             return testIntent;
         }
     };
@@ -33,15 +34,34 @@ public class ThankyouActivityTest {
     @Test
     public void setsRightMessageBasedOnIntentExtra() {
         onView(withId(R.id.tv_greeting))
-                .check(matches(withText("Welcome: Mekone Tolrom ")));
+                .check(matches(withText("Name : Mekone Tolrom")));
+        onView(withId(R.id.tv_username))
+                .check(matches(withText("Username : mtolrom")));
+        onView(withId(R.id.tv_email))
+                .check(matches(withText("Email : sde@outlook.com")));
+        onView(withId(R.id.tv_age))
+                .check(matches(withText("Age : 25")));
+        onView(withId(R.id.tv_occupation))
+                .check(matches(withText("Occupation : Engineer")));
+        onView(withId(R.id.tv_description))
+                .check(matches(withText("Description : Cloud Computing Engineer")));
     }
 
     @Test
     public void goBackToMainPage(){
         onView(withId(R.id.button2)).perform(click());
+
         onView(withId(R.id.edit_name))
                 .check(matches(withText("")));
+        onView(withId(R.id.edit_username))
+                .check(matches(withText("")));
+        onView(withId(R.id.edit_email))
+                .check(matches(withText("")));
         onView(withId(R.id.edit_age))
+                .check(matches(withText("")));
+        onView(withId(R.id.edit_occupation))
+                .check(matches(withText("")));
+        onView(withId(R.id.edit_description))
                 .check(matches(withText("")));
     }
 }

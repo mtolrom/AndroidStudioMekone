@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                     if (username != null) {
                         if (Integer.parseInt(age.getText().toString()) > 18) {
                             Intent it = new Intent(this, ThankyouActivity.class);
-                            it.putExtra("name", usr_name.getText().toString());
-                            it.putExtra("email", email.getText().toString());
-                            it.putExtra("username", username.getText().toString());
-                            it.putExtra("age", age.getText().toString());
+                            it.putExtra("name", "Name : " + usr_name.getText().toString());
+                            it.putExtra("email", "Email : " + email.getText().toString());
+                            it.putExtra("username", "Username : " + username.getText().toString());
+                            it.putExtra("age", "Age : " + age.getText().toString());
                             //it.putExtra("dob", dob.getText().toString());
-                            it.putExtra("occupation", occupation.getText().toString());
-                            it.putExtra("description", description.getText().toString());
+                            it.putExtra("occupation", "Occupation : " + occupation.getText().toString());
+                            it.putExtra("description", "Description : " + description.getText().toString());
                             startActivity(it);
                         } else {
                             err_message.setText(R.string.fix_errors);
