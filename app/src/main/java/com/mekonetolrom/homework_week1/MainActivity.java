@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private String button_text;
@@ -39,15 +43,24 @@ public class MainActivity extends AppCompatActivity {
     {
         try {
             button_text = ((Button) View).getText().toString();
+            String[] int_years = age.getText().toString().split("/");
+
+            Date today = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(today); // don't forget this if date is arbitrary
+            int year = cal.get(Calendar.YEAR);
+
+            int int_age = year - Integer.parseInt(int_years[2]);
+
             if (button_text.equals("Submit")) {
                 if (age.getText().toString() != null) {
                     if (username != null) {
-                        if (Integer.parseInt(age.getText().toString()) > 18) {
+                        if (int_age >= 18) {
                             Intent it = new Intent(this, ThankyouActivity.class);
                             it.putExtra("name", "Name : " + usr_name.getText().toString());
                             it.putExtra("email", "Email : " + email.getText().toString());
                             it.putExtra("username", "Username : " + username.getText().toString());
-                            it.putExtra("age", "Age : " + age.getText().toString());
+                            it.putExtra("age", "Age : " + Integer.toString(int_age));
                             //it.putExtra("dob", dob.getText().toString());
                             it.putExtra("occupation", "Occupation : " + occupation.getText().toString());
                             it.putExtra("description", "Description : " + description.getText().toString());
@@ -71,5 +84,22 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putString("name", usr_name.getText().toString());
+    }
+
+    public static int getDiffYears(Date first, Date last) {
+        Calendar a = getCalendar(first);
+        Calendar b = getCalendar(last);
+        int diff = b.get(Calendar.YEAR) - a.get(Calendar.YEAR);
+        if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) ||
+                (a.get(Calendar.MONTH) == b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
+            diff--;
+        }
+        return diff;
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
     }
 }
