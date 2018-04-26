@@ -8,10 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         age = findViewById(R.id.edit_age);
         email = findViewById(R.id.edit_email);
         username = findViewById(R.id.edit_username);
-        //dob = findViewById(R.id.edit_dob);
         err_message = findViewById(R.id.error_status);
         occupation = findViewById(R.id.edit_occupation);
         description = findViewById(R.id.edit_description);
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                             it.putExtra("email", "Email : " + email.getText().toString());
                             it.putExtra("username", "Username : " + username.getText().toString());
                             it.putExtra("age", "Age : " + Integer.toString(int_age));
-                            //it.putExtra("dob", dob.getText().toString());
                             it.putExtra("occupation", "Occupation : " + occupation.getText().toString());
                             it.putExtra("description", "Description : " + description.getText().toString());
                             startActivity(it);
@@ -89,22 +86,5 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putString("name", usr_name.getText().toString());
-    }
-
-    public static int getDiffYears(Date first, Date last) {
-        Calendar a = getCalendar(first);
-        Calendar b = getCalendar(last);
-        int diff = b.get(Calendar.YEAR) - a.get(Calendar.YEAR);
-        if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) ||
-                (a.get(Calendar.MONTH) == b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
-            diff--;
-        }
-        return diff;
-    }
-
-    public static Calendar getCalendar(Date date) {
-        Calendar cal = Calendar.getInstance(Locale.US);
-        cal.setTime(date);
-        return cal;
     }
 }
