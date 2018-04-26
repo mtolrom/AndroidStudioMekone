@@ -58,7 +58,7 @@ public class ThankyouActivityTest {
         onView(withId(R.id.edit_email))
                 .check(matches(withText("")));
         onView(withId(R.id.edit_age))
-                .check(matches(withText("mm/dd/yyyy")));
+                .check(matches(withText("")));
         onView(withId(R.id.edit_occupation))
                 .check(matches(withText("")));
         onView(withId(R.id.edit_description))

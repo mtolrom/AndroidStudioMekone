@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,14 +44,18 @@ public class MainActivity extends AppCompatActivity {
     {
         try {
             button_text = ((Button) View).getText().toString();
-            String[] int_years = age.getText().toString().split("/");
+
+            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(age.getText().toString());
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(date1); // don't forget this if date is arbitrary
+            int year2 = cal1.get(Calendar.YEAR);
 
             Date today = new Date();
             Calendar cal = Calendar.getInstance();
             cal.setTime(today); // don't forget this if date is arbitrary
             int year = cal.get(Calendar.YEAR);
 
-            int int_age = year - Integer.parseInt(int_years[2]);
+            int int_age = year - year2;
 
             if (button_text.equals("Submit")) {
                 if (age.getText().toString() != null) {

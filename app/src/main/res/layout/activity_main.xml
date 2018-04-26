@@ -68,7 +68,7 @@
         android:id="@+id/id_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age"
+        android:text="Age (mm/dd/yyyy)"
         android:textSize="18dp"
         android:padding="15dp"
         android:layout_below="@id/id_email" />
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:text="mm/dd/yyyy"
+        android:text=""
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/id_age"
