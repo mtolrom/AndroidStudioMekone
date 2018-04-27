@@ -29,7 +29,6 @@ public class ThankyouActivity extends AppCompatActivity {
         textOccupation = findViewById(R.id.tv_occupation);
         textDescription = findViewById(R.id.tv_description);
 
-        //StringBuilder msg = new StringBuilder("Welcome: ");
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
