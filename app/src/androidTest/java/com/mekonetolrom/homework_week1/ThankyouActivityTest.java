@@ -21,12 +21,12 @@ public class ThankyouActivityTest {
         @Override
         protected Intent getActivityIntent() {
             Intent testIntent = new Intent();
-            testIntent.putExtra("name", "Name : Mekone Tolrom");
-            testIntent.putExtra("age", "Age : 25");
-            testIntent.putExtra("email", "Email : sde@outlook.com");
-            testIntent.putExtra("username", "Username : mtolrom");
-            testIntent.putExtra("occupation", "Occupation : Engineer");
-            testIntent.putExtra("description", "Description : Cloud Computing Engineer");
+            testIntent.putExtra("name", R.string.str_name);
+            testIntent.putExtra("age", R.string.str_age);
+            testIntent.putExtra("email", R.string.str_email);
+            testIntent.putExtra("username", R.string.str_username);
+            testIntent.putExtra("occupation", R.string.str_occupation);
+            testIntent.putExtra("description", R.string.str_description);
             return testIntent;
         }
     };
@@ -34,17 +34,17 @@ public class ThankyouActivityTest {
     @Test
     public void setsRightMessageBasedOnIntentExtra() {
         onView(withId(R.id.tv_greeting))
-                .check(matches(withText("Name : Mekone Tolrom")));
+                .check(matches(withText(R.string.r_name)));
         onView(withId(R.id.tv_username))
-                .check(matches(withText("Username : mtolrom")));
+                .check(matches(withText(R.string.r_username)));
         onView(withId(R.id.tv_email))
-                .check(matches(withText("Email : sde@outlook.com")));
+                .check(matches(withText(R.string.r_email)));
         onView(withId(R.id.tv_age))
-                .check(matches(withText("Age : 25")));
+                .check(matches(withText(R.string.r_age)));
         onView(withId(R.id.tv_occupation))
-                .check(matches(withText("Occupation : Engineer")));
+                .check(matches(withText(R.string.r_occupation)));
         onView(withId(R.id.tv_description))
-                .check(matches(withText("Description : Cloud Computing Engineer")));
+                .check(matches(withText(R.string.r_description)));
     }
 
     @Test

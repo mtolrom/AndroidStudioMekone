@@ -47,7 +47,7 @@ public class MainActivityTest {
         onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
 
         onView(withId(R.id.edit_name))
-               .check(matches(withText(R.string.full_name)));
+               .check(matches(withText(R.string.str_name)));
         onView(withId(R.id.edit_age))
                 .check(matches(withText("25")));
     }
@@ -60,7 +60,7 @@ public class MainActivityTest {
         TestGoodies.rotateScreen(activityTestRule.getActivity());
 
         onView(withId(R.id.edit_name))
-                .check(matches(withText(R.string.full_name)));
+                .check(matches(withText(R.string.str_name)));
         onView(withId(R.id.edit_age))
                 .check(matches(withText("25")));
     }
@@ -68,20 +68,20 @@ public class MainActivityTest {
     @Test
     public void enterThankyouActivityWithMessage() {
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
-        onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
+        onView(withId(R.id.edit_age)).perform(typeText("2/2/1975"), closeSoftKeyboard());
 
         Intent resultData = new Intent();
-        resultData.putExtra("name", R.string.full_name);
-        resultData.putExtra("age", R.integer.my_age);
+        resultData.putExtra("name", R.string.str_name);
+        resultData.putExtra("age", R.string.str_age);
         Instrumentation.ActivityResult result =
                 new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
     }
 
     @Test
     public void testClickButton(){
-        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
         onView(withId(R.id.edit_age)).perform(typeText("2/2/1975"), closeSoftKeyboard());
-        onView(withId(R.id.edit_username)).perform(typeText("mtolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_username)).perform(typeText("mtolrom"), closeSoftKeyboard());
         onView(withId(R.id.edit_email)).perform(typeText("mtolrom@outlook.com"), closeSoftKeyboard());
         onView(withId(R.id.edit_occupation)).perform(typeText("Engineer".trim()), closeSoftKeyboard());
         onView(withId(R.id.edit_description)).perform(typeText("Cloud Computing Engineer"), closeSoftKeyboard());
@@ -89,17 +89,17 @@ public class MainActivityTest {
         onView(withId(R.id.id_submit)).perform(click());
 
         onView(withId(R.id.tv_greeting))
-                .check(matches(withText("Name : Mekone Tolrom")));
+                .check(matches(withText(R.string.r_name)));
         onView(withId(R.id.tv_username))
-                .check(matches(withText("Username : mtolrom")));
+                .check(matches(withText(R.string.r_username)));
         onView(withId(R.id.tv_email))
-                .check(matches(withText("Email : mtolrom@outlook.com")));
+                .check(matches(withText(R.string.r_email)));
         onView(withId(R.id.tv_age))
-                .check(matches(withText("Age : 43")));
+                .check(matches(withText(R.string.r_age)));
         onView(withId(R.id.tv_occupation))
-                .check(matches(withText("Occupation : Engineer")));
+                .check(matches(withText(R.string.r_occupation)));
         onView(withId(R.id.tv_description))
-                .check(matches(withText("Description : Cloud Computing Engineer")));
+                .check(matches(withText(R.string.r_description)));
     }
 
     @Test
