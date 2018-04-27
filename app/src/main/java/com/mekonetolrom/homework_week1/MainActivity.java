@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (button_text.equals("Submit")) {
                 if (age.getText().toString() != null) {
-                    if (username != null) {
+                    if (username.getText().toString() != "") {
                         if (int_age >= 18) {
                             Intent it = new Intent(this, ThankyouActivity.class);
                             it.putExtra("name", "Name : " + usr_name.getText().toString());
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
                             err_message.setText(R.string.fix_errors);
                             err_message.setTextColor(getColor(R.color.colorAccent));
                         }
+                    }else{
+                        //display in short period of time
+                        Toast.makeText(getApplicationContext(), "Name is missing.",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             }

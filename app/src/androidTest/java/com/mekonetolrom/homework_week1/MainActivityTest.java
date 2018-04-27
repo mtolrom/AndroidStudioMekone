@@ -112,8 +112,15 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testUsernameNull(){
+        onView(withId(R.id.edit_age)).perform(typeText("2/2/1975"), closeSoftKeyboard());
+        onView(withId(R.id.id_submit)).perform(click());
+        //onView(withText("Name is missing.")).inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testAgeNull(){
-        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
+        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
         onView(withId(R.id.id_submit)).perform(click());
         onView(withId(R.id.error_status))
                 .check(matches(withText(R.string.oops_errors)));
@@ -124,7 +131,6 @@ public class MainActivityTest {
     @Test
     public void testAgeLessThanEighteen(){
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom".trim()), closeSoftKeyboard());
-        String s = Integer.toString(R.integer.under_age);
         onView(withId(R.id.edit_age)).perform(typeText("2/2/2010"), closeSoftKeyboard());
         onView(withId(R.id.id_submit)).perform(click());
         onView(withId(R.id.error_status))
