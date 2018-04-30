@@ -21,16 +21,9 @@
     <string name="form_status">_status_</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome">Welcome: </string>
-    <string name="key_name">name</string>
-    <string name="key_age">age</string>
+
     <string name="fix_errors">Fix Errors</string>
     <string name="oops_errors">OOPS Errors!</string>
-    <string name="full_name">Mekone Tolrom</string>
-    <string name="s_email">sde@outlook.com</string>
-    <string name="alias">mtolrom</string>
-    <string name="d_date">2/2/1980</string>
-    <string name="the_age">15</string>
-    <string name="test_age">25</string>
 
     <string name="str_name">Mekone Tolrom</string>
     <string name="str_age">2/2/1975</string>
@@ -46,4 +39,7 @@
     <string name="r_email">Email : mtolrom@outlook.com</string>
     <string name="r_occupation">Occupation : Engineer</string>
     <string name="r_description">Description : Cloud Computing Engineer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

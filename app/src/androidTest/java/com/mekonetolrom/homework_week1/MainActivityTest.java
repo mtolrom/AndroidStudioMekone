@@ -55,14 +55,18 @@ public class MainActivityTest {
     @Test
     public void canRotate() {
         onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
-        onView(withId(R.id.edit_age)).perform(typeText("25"), closeSoftKeyboard());
+        onView(withId(R.id.edit_age)).perform(typeText("2/2/1975"), closeSoftKeyboard());
+        onView(withId(R.id.edit_email)).perform(typeText("mtolrom@outlook.com"), closeSoftKeyboard());
+        onView(withId(R.id.edit_username)).perform(typeText("mtolrom"), closeSoftKeyboard());
+        onView(withId(R.id.edit_occupation)).perform(typeText("Engineer"), closeSoftKeyboard());
+        onView(withId(R.id.edit_description)).perform(typeText("Cloud Computing Engineer"), closeSoftKeyboard());
 
         TestGoodies.rotateScreen(activityTestRule.getActivity());
 
         onView(withId(R.id.edit_name))
                 .check(matches(withText(R.string.str_name)));
         onView(withId(R.id.edit_age))
-                .check(matches(withText("25")));
+                .check(matches(withText(R.string.str_age)));
     }
 
     @Test

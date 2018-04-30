@@ -64,4 +64,5 @@ public class ThankyouActivityTest {
         onView(withId(R.id.edit_description))
                 .check(matches(withText("")));
     }
+
 }
