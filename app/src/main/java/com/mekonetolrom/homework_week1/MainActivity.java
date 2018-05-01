@@ -1,13 +1,13 @@
 package com.mekonetolrom.homework_week1;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getFragmentManager());
+        Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new ProfileFragment(), "Profile");
         adapter.addFragment(new MatchesFragment(), "Matches");
         adapter.addFragment(new SettingsFragment(), "Settings");
