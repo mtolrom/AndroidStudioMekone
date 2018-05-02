@@ -22,6 +22,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        /*
         if (getArguments() != null) {
             nameParam = getArguments().getString("name");
             usernameParam = getArguments().getString("username");
@@ -30,6 +31,7 @@ public class ProfileFragment extends Fragment {
             occupationParam = getArguments().getString("occupation");
             descriptionParam = getArguments().getString("description");
         }
+        */
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -61,6 +63,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+
         super.onAttach(context);
         nameParam = getArguments().getString("name");
         usernameParam = getArguments().getString("username");
@@ -68,6 +71,23 @@ public class ProfileFragment extends Fragment {
         ageParam = getArguments().getString("age");
         occupationParam = getArguments().getString("occupation");
         descriptionParam = getArguments().getString("description");
+
     }
+
+    /*
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            nameParam = savedInstanceState.getBundle("name").toString();
+            //nameParam = getArguments().getString("name");
+            usernameParam = getArguments().getString("username");
+            emailParam = getArguments().getString("email");
+            ageParam = getArguments().getString("age");
+            occupationParam = getArguments().getString("occupation");
+            descriptionParam = getArguments().getString("description");
+        }
+    }
+    */
 }
 
