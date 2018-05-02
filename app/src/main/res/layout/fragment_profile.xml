@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    android:paddingTop="30dp"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile tab" />
+        android:id="@+id/tv_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_alignParentLeft="true" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_greeting" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_username" />
+
+    <TextView
+        android:id="@+id/tv_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="age"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_email" />
+
+    <TextView
+        android:id="@+id/tv_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="occupation"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_age" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:textSize="18dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_occupation" />
+
+    <ImageView
+        android:id="@+id/tv_image"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:padding="10dp"
+        android:src="@drawable/knee"
+        android:layout_below="@id/tv_description" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Sign Up"
+
+        android:layout_below="@id/tv_image" />
+
+</RelativeLayout>

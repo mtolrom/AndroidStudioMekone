@@ -1,5 +1,6 @@
 package com.mekonetolrom.homework_week1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String button_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
+        }
+    }
+    public void signUp(View View)
+    {
+        button_text = ((Button) View).getText().toString();
+        if (button_text.equals("Sign Up")) {
+            Intent it = new Intent(this, ThankyouActivity.class);
+            startActivity(it);
         }
     }
 }
