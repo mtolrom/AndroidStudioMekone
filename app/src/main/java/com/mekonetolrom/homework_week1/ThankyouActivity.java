@@ -69,6 +69,7 @@ public class ThankyouActivity extends AppCompatActivity {
                             //it.putExtra("dob", dob.getText().toString());
                             it.putExtra("occupation", "Occupation : " + occupation.getText().toString());
                             it.putExtra("description", "Description : " + description.getText().toString());
+
                             startActivity(it);
                         } else {
                             err_message.setText(R.string.fix_errors);
