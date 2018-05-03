@@ -10,9 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.view.View;
-import android.widget.Button;
-import android.support.v4.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView, textUsername, textEmail, textAge, textOccupation, textDescription;
     private static String name, username, email, age, occupation, description;
     private FragmentManager manager;
-    private static String n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +35,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-
-        //textView = findViewById(R.id.tv_greeting);
-        //textUsername = findViewById(R.id.tv_username);
-        //textEmail = findViewById(R.id.tv_email);
-        //textAge = findViewById(R.id.tv_age);
-        //textOccupation = findViewById(R.id.tv_occupation);
-        //textDescription = findViewById(R.id.tv_description);
-
-        //StringBuilder msg = new StringBuilder("Welcome: ");
         Intent intent = getIntent();
         if(intent != null) {
             Bundle b = intent.getExtras();
@@ -62,19 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 description = b.getString("description");
             }
         }
-
-        //name = "kokoko";
-
-        //manager = getSupportFragmentManager();
-        //firstNumber = findViewById(R.id.firstNumber);
-        //secondNumber = findViewById(R.id.secondNumber);
-
-        //textView.setText(name);
-        //textUsername.setText(username);
-        //textEmail.setText(email);
-        //textAge.setText(age);
-        //textOccupation.setText(occupation);
-        //textDescription.setText(description);
     }
 
     // Add Fragments to Tabs
@@ -112,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void addFragment(Fragment fragment, String title) {
             Bundle bundle = new Bundle();
-            //important line here to note
+
             bundle.putString("name", name);
             bundle.putString("username", username);
             bundle.putString("email", email);
