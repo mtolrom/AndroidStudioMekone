@@ -34,7 +34,6 @@ public class ThankyouActivity extends AppCompatActivity {
         age = findViewById(R.id.edit_age);
         email = findViewById(R.id.edit_email);
         username = findViewById(R.id.edit_username);
-        //dob = findViewById(R.id.edit_dob);
         err_message = findViewById(R.id.error_status);
         occupation = findViewById(R.id.edit_occupation);
         description = findViewById(R.id.edit_description);
@@ -90,6 +89,11 @@ public class ThankyouActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putString("name", usr_name.getText().toString());
+        outState.putString("username", username.getText().toString());
+        outState.putString("email", email.getText().toString());
+        outState.putString("age", age.getText().toString());
+        outState.putString("occupation", occupation.getText().toString());
+        outState.putString("description", description.getText().toString());
     }
 
 }

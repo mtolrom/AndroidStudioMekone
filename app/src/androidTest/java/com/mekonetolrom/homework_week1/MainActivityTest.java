@@ -13,8 +13,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import android.widget.Button;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-
 
 public class MainActivityTest {
 
@@ -38,39 +36,11 @@ public class MainActivityTest {
 
     /*
     @Test
-    public void setsRightMessageBasedOnIntentExtra() {
-        onView(withId(R.id.tv_greeting))
-                .check(matches(withText(R.string.r_name)));
-        onView(withId(R.id.tv_username))
-                .check(matches(withText(R.string.r_username)));
-        onView(withId(R.id.tv_email))
-                .check(matches(withText(R.string.r_email)));
-        onView(withId(R.id.tv_age))
-                .check(matches(withText(R.string.r_age)));
-        onView(withId(R.id.tv_occupation))
-                .check(matches(withText(R.string.r_occupation)));
-        onView(withId(R.id.tv_description))
-                .check(matches(withText(R.string.r_description)));
-    }
-    */
-
-    @Test
     public void goBackToMainPage(){
-        //ProfileFragment fragment = new ProfileFragment();
-        //activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
-                //.add(R.id.container, fragment).commit();
-        //activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
-          //      .add(R.id.button2, fragment).commit();
-        //onView(withId(R.id.txt_cool_message)).check(matches(withText("Cool")));
-
-        onView(withId(R.id.viewpager))
-                .check(matches(isDisplayed()));
-
-        //onView(withId(R.id.pager))
-          //      .perform(swipeLeft());
-
+        ProfileFragment fragment = new ProfileFragment();
+        activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.button2, fragment).commit();
         onView(withId(R.id.button2)).perform(click());
-
 
         onView(withId(R.id.edit_name))
                 .check(matches(withText("")));
@@ -86,4 +56,5 @@ public class MainActivityTest {
                 .check(matches(withText("")));
 
     }
+    */
 }

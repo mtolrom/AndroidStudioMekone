@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
         tvOccupation = v.findViewById(R.id.tv_occupation);
         tvDescription = v.findViewById(R.id.tv_description);
 
-        /*
+
         if(getArguments() != null) {
             nameParam = getArguments().getString("name");
             usernameParam = getArguments().getString("username");
@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
             occupationParam = getArguments().getString("occupation");
             descriptionParam = getArguments().getString("description");
         }
-        */
+
 
         tvName.setText(nameParam);
         tvUsername.setText(usernameParam);
@@ -62,22 +62,6 @@ public class ProfileFragment extends Fragment {
             }
         });
         return v;
-    }
-
-
-
-    @Override
-    public void onAttach(Context context) {
-
-        super.onAttach(context);
-        if(getArguments() != null) {
-            nameParam = getArguments().getString("name");
-            usernameParam = getArguments().getString("username");
-            emailParam = getArguments().getString("email");
-            ageParam = getArguments().getString("age");
-            occupationParam = getArguments().getString("occupation");
-            descriptionParam = getArguments().getString("description");
-        }
     }
 
 }

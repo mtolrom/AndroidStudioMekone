@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
