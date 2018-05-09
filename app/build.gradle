@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 apply from: '../jacoco.gradle'
+// Gradle Plugin 2.0+
+android {
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+}
 
 android {
     compileSdkVersion 27

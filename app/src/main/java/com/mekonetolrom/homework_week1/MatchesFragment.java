@@ -14,6 +14,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.support.design.widget.Snackbar;
 
 
 public class MatchesFragment extends Fragment {
@@ -39,9 +42,40 @@ public class MatchesFragment extends Fragment {
             picture = (ImageView) itemView.findViewById(R.id.card_image);
             name = (TextView) itemView.findViewById(R.id.card_title);
             description = (TextView) itemView.findViewById(R.id.card_text);
+            // Adding Snackbar to Action Button inside card
+            /*
+            Button button = (Button)itemView.findViewById(R.id.action_button);
+            button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "Action is pressed",
+                            Snackbar.LENGTH_LONG).show();
+                }
+            });
+            */
+
+            ImageButton favoriteImageButton =
+                    (ImageButton) itemView.findViewById(R.id.favorite_button);
+            favoriteImageButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "You liked " + name.getText(),
+                            Snackbar.LENGTH_LONG).show();
+                }
+            });
+
+            /*
+            ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
+            shareImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "Share article",
+                            Snackbar.LENGTH_LONG).show();
+                }
+            });
+            */
         }
     }
-
     /**
      * Adapter to display recycler view.
      */
