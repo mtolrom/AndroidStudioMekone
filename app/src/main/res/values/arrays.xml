@@ -1,8 +1,8 @@
 <resources>
     <string-array name="places">
-        <item>Palais Garnie</item>
-        <item>Piazza del Duomo</item>
-        <item>Manhattan</item>
+        <item>Bellevue Washington</item>
+        <item>Redmond Washington</item>
+        <item>NDjamena, Chad</item>
         <item>Senso-ji</item>
         <item>Sultan Ahmed Mosque</item>
         <item>Table Mountain</item>

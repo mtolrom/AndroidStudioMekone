@@ -13,18 +13,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
-        ContentAdapter adapter = new ContentAdapter();
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-
-        // Set padding for Tiles (not needed for Cards/Lists!)
-        int tilePadding = getResources().getDimensionPixelSize(R.dimen.tile_padding);
-        recyclerView.setPadding(tilePadding, tilePadding, tilePadding, tilePadding);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-        return recyclerView;
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -33,6 +22,7 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    /*
     public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         // Set numbers of List in RecyclerView.
         private static final int LENGTH = 18;
@@ -55,4 +45,5 @@ public class SettingsFragment extends Fragment {
             return LENGTH;
         }
     }
+    */
 }
