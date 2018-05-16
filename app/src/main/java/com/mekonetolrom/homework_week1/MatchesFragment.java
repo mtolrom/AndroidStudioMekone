@@ -8,110 +8,101 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
+
+
+import com.mekonetolrom.homework_week1.MatchesItem;
+import java.util.List;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MatchesFragment extends Fragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
-        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        return recyclerView;
-    }
+    // TODO: Customize parameter argument names
+    public static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String ARG_DATA_SET = "data-set";
+    // TODO: Customize parameters
+    private int mColumnCount = 3;
+    private List<MatchesItem> mDataSet;
+    private OnListFragmentInteractionListener mListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView picture;
-        public TextView name;
-        public TextView description;
-        public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.fragment_matches, parent, false));
-            picture = (ImageView) itemView.findViewById(R.id.card_image);
-            name = (TextView) itemView.findViewById(R.id.card_title);
-            description = (TextView) itemView.findViewById(R.id.card_text);
-            // Adding Snackbar to Action Button inside card
-            /*
-            Button button = (Button)itemView.findViewById(R.id.action_button);
-            button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Action is pressed",
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
-            */
-
-            ImageButton favoriteImageButton =
-                    (ImageButton) itemView.findViewById(R.id.favorite_button);
-            favoriteImageButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "You liked " + name.getText(),
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
-
-            /*
-            ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
-            shareImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Share article",
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
-            */
-        }
-    }
     /**
-     * Adapter to display recycler view.
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
      */
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
-        // Set numbers of List in RecyclerView.
-        private static final int LENGTH = 18;
-        private final String[] mPlaces;
-        private final String[] mPlaceDesc;
-        private final Drawable[] mPlacePictures;
-        public ContentAdapter(Context context) {
-            Resources resources = context.getResources();
-            mPlaces = resources.getStringArray(R.array.places);
-            mPlaceDesc = resources.getStringArray(R.array.place_desc);
-            TypedArray a = resources.obtainTypedArray(R.array.places_picture);
-            mPlacePictures = new Drawable[a.length()];
-            for (int i = 0; i < mPlacePictures.length; i++) {
-                mPlacePictures[i] = a.getDrawable(i);
+    public MatchesFragment() {
+    }
+
+    // TODO: Customize parameter initialization
+    @SuppressWarnings("unused")
+    public static MatchesFragment newInstance(int columnCount) {
+        MatchesFragment fragment = new MatchesFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mDataSet = getArguments().getParcelableArrayList(ARG_DATA_SET);
+        }
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_matches, container, false);
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            RecyclerView recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            a.recycle();
+            recyclerView.setAdapter(new MyMatchesItemRecyclerViewAdapter(mDataSet, mListener));
         }
+        return view;
+    }
 
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
-        }
 
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.picture.setImageDrawable(mPlacePictures[position % mPlacePictures.length]);
-            holder.name.setText(mPlaces[position % mPlaces.length]);
-            holder.description.setText(mPlaceDesc[position % mPlaceDesc.length]);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
         }
+    }
 
-        @Override
-        public int getItemCount() {
-            return LENGTH;
-        }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnListFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onListFragmentInteraction(MatchesItem item);
     }
 }
