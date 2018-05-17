@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mekonetolrom.homework_week1.FirebaseMatchesViewModel;
+
 public class MainActivity extends AppCompatActivity implements MatchesFragment.OnListFragmentInteractionListener  {
 
     private String button_text;
@@ -24,10 +26,7 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
     private static String name, imageUri; //username, email, age, occupation, description;
     private static boolean liked;
     private FragmentManager manager;
-
     private FirebaseMatchesViewModel viewModel;
-    private EditText newTodoItemText;
-    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,24 +60,6 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         // Set Tabs inside Toolbar
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-    }
-
-    public void MatchesItem(View view) {
-        String title = newTodoItemText.getText().toString();
-        MatchesItem item = new MatchesItem(name, imageUri, false);
-        viewModel.addMatchesItem(item);
-    }
-
-    @Override
-    public void onListFragmentInteraction(MatchesItem item) {
-        item.liked = true;
-        viewModel.updateMatchesItem(item);
-    }
-
-    @Override
-    protected void onPause() {
-        viewModel.clear();
-        super.onPause();
     }
 
     // Add Fragments to Tabs
@@ -139,5 +120,11 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    //@Override
+    public void onListFragmentInteraction(MatchesItem item) {
+        item.liked = true;
+        viewModel.updateMatchesItem(item);
     }
 }
