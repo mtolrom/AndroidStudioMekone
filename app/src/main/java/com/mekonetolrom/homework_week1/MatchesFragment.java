@@ -15,10 +15,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
-import java.util.List;
-
-
-
 
 public class MatchesFragment extends Fragment {
 
@@ -27,7 +23,7 @@ public class MatchesFragment extends Fragment {
     public static final String ARG_DATA_SET = "data-set";
     // TODO: Customize parameters
     private int mColumnCount = 3;
-    private List<MatchesItem> mDataSet;
+    private static ArrayList<MatchesItem> mDataSet;
     private OnListFragmentInteractionListener mListener;
 
     private FirebaseMatchesViewModel viewModel;
@@ -37,6 +33,7 @@ public class MatchesFragment extends Fragment {
     private static String name, imageUri;
     private static boolean liked;
     private FragmentManager manager;
+    private MyMatchesItemRecyclerViewAdapter myMatchesItemRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,6 +48,7 @@ public class MatchesFragment extends Fragment {
         MatchesFragment fragment = new MatchesFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putParcelableArrayList(ARG_DATA_SET, mDataSet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,32 +61,6 @@ public class MatchesFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             mDataSet = getArguments().getParcelableArrayList(ARG_DATA_SET);
         }
-
-        viewModel.getMatchesItems(
-                (ArrayList<MatchesItem> matchesItems) -> {
-                    FragmentManager manager = getFragmentManager();
-                    MatchesFragment fragment = (MatchesFragment) manager.findFragmentByTag("matchesItemFragment");
-
-                    /*
-                    if (fragment != null) {
-                        // Remove fragment to re-add it
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        transaction.remove(fragment);
-                        transaction.commit();
-                    }
-                    */
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(ARG_DATA_SET, matchesItems);
-
-                    MatchesFragment matchesItemFragment = new MatchesFragment();
-                    matchesItemFragment.setArguments(bundle);
-
-                    //FragmentTransaction transaction = manager.beginTransaction();
-                    //transaction.add(R.id.todoItemListFragmentContainer, todoItemFragment, "todoItemFragment");
-                    //transaction.commit();
-                }
-        );
     }
 
     @Override
@@ -105,7 +77,14 @@ public class MatchesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyMatchesItemRecyclerViewAdapter(mDataSet, mListener));
+            this.myMatchesItemRecyclerViewAdapter = new MyMatchesItemRecyclerViewAdapter(mDataSet, mListener);
+            recyclerView.setAdapter(myMatchesItemRecyclerViewAdapter);
+
+            viewModel.getMatchesItems(
+                    (ArrayList<MatchesItem> matchesItem) -> {
+                        myMatchesItemRecyclerViewAdapter.updateMatchesListItems(matchesItem);
+                    }
+            );
         }
         return view;
     }
@@ -128,6 +107,7 @@ public class MatchesFragment extends Fragment {
         viewModel.clear();
         super.onPause();
     }
+
 
     @Override
     public void onAttach(Context context) {

@@ -9,24 +9,28 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mekonetolrom.homework_week1.FirebaseMatchesViewModel;
-
-public class MainActivity extends AppCompatActivity implements MatchesFragment.OnListFragmentInteractionListener  {
+public class MainActivity extends AppCompatActivity implements MatchesFragment.OnListFragmentInteractionListener{
 
     private String button_text;
     private TextView textView, textUsername, textEmail, textAge, textOccupation, textDescription;
     private static String name, imageUri; //username, email, age, occupation, description;
     private static boolean liked;
+    private static MatchesItem mItem;
     private FragmentManager manager;
     private FirebaseMatchesViewModel viewModel;
+
+    @Override
+    public void onListFragmentInteraction(MatchesItem item) {
+        item.liked = true;
+        viewModel.updateMatchesItem(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,9 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        Intent intent = getIntent();
-        if(intent != null) {
-            Bundle b = intent.getExtras();
-
+        //Intent intent = getIntent();
+        //if(intent != null) {
+            /*
             assert b != null;
             if (b != null) {
                 name = b.getString("name");
@@ -54,12 +57,22 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
                 //occupation = b.getString("occupation");
                 //description = b.getString("description");
             }
-        }
+            */
+        //}
 
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+    }
+
+    public void signUp(View View)
+    {
+        button_text = ((Button) View).getText().toString();
+        if (button_text.equals("Sign Up")) {
+            Intent it = new Intent(this, ThankyouActivity.class);
+            startActivity(it);
+        }
     }
 
     // Add Fragments to Tabs
@@ -120,11 +133,5 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-    }
-
-    //@Override
-    public void onListFragmentInteraction(MatchesItem item) {
-        item.liked = true;
-        viewModel.updateMatchesItem(item);
     }
 }

@@ -20,7 +20,6 @@ public class ThankyouActivity extends AppCompatActivity {
     private EditText age;
     private EditText email;
     private EditText username;
-    //private EditText dob;
     private EditText occupation;
     private EditText description;
     private TextView err_message;

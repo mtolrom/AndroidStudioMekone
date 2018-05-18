@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.mekonetolrom.homework_week1.MatchesFragment.OnListFragmentInteractionListener;
 import com.mekonetolrom.homework_week1.MatchesItem;
+import com.mekonetolrom.homework_week1.FirebaseMatchesViewModel;
+import com.mekonetolrom.homework_week1.FirebaseMatchesModel;
 
 import java.util.List;
+import android.support.v7.util.DiffUtil;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link MatchesItem} and makes a call to the
@@ -20,10 +23,12 @@ import java.util.List;
 
 public class MyMatchesItemRecyclerViewAdapter extends RecyclerView.Adapter<MyMatchesItemRecyclerViewAdapter.ViewHolder>  {
     private final List<MatchesItem> mValues;
+    //private final List<MatchesItem> mMatches;
     private final OnListFragmentInteractionListener mListener;
 
     public MyMatchesItemRecyclerViewAdapter(List<MatchesItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
+        //mMatches = items;
         mListener = listener;
     }
 
@@ -33,6 +38,15 @@ public class MyMatchesItemRecyclerViewAdapter extends RecyclerView.Adapter<MyMat
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_matches, parent, false);
         return new ViewHolder(view);
+    }
+
+    public void updateMatchesListItems(List<MatchesItem> matches) {
+        final MatchesDiffCallback diffCallback = new MatchesDiffCallback(this.mValues, matches);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.mValues.clear();
+        this.mValues.addAll(matches);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @Override
