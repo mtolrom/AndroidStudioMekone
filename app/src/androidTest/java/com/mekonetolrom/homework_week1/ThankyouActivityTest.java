@@ -97,7 +97,7 @@ public class ThankyouActivityTest {
 
     @Test
     public void testClickButton(){
-        onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
+        //onView(withId(R.id.edit_name)).perform(typeText("Mekone Tolrom"), closeSoftKeyboard());
         onView(withId(R.id.edit_age)).perform(typeText("2/2/1975"), closeSoftKeyboard());
         onView(withId(R.id.edit_username)).perform(typeText("mtolrom"), closeSoftKeyboard());
         onView(withId(R.id.edit_email)).perform(typeText("mtolrom@outlook.com"), closeSoftKeyboard());
@@ -106,8 +106,8 @@ public class ThankyouActivityTest {
 
         onView(withId(R.id.id_submit)).perform(click());
 
-        onView(withId(R.id.tv_greeting))
-                .check(matches(withText(R.string.r_name)));
+        //onView(withId(R.id.tv_greeting))
+          //      .check(matches(withText(R.string.r_name)));
         onView(withId(R.id.tv_username))
                 .check(matches(withText(R.string.r_username)));
         onView(withId(R.id.tv_email))
