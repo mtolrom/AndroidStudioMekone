@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
 
     private String button_text;
     private TextView textView, textUsername, textEmail, textAge, textOccupation, textDescription;
-    private static String name, imageUri; //username, email, age, occupation, description;
-    private static boolean liked;
-    private static MatchesItem mItem;
+    private static String name, username, email, age, occupation, description;
+    //private static boolean liked;
+    //private static MatchesItem mItem;
     private FragmentManager manager;
     private FirebaseMatchesViewModel viewModel;
 
@@ -42,23 +42,17 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        //Intent intent = getIntent();
-        //if(intent != null) {
-            /*
+        Bundle b = new Bundle();
+
             assert b != null;
             if (b != null) {
                 name = b.getString("name");
-                imageUri = b.getString("imageUri");
-                liked = false;
-                //name = b.getString("name");
-                //username = b.getString("username");
-                //email = b.getString("email");
-                //age = b.getString("age");
-                //occupation = b.getString("occupation");
-                //description = b.getString("description");
+                username = b.getString("username");
+                email = b.getString("email");
+                age = b.getString("age");
+                occupation = b.getString("occupation");
+                description = b.getString("description");
             }
-            */
-        //}
 
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
@@ -66,18 +60,9 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         tabs.setupWithViewPager(viewPager);
     }
 
-    public void signUp(View View)
-    {
-        button_text = ((Button) View).getText().toString();
-        if (button_text.equals("Sign Up")) {
-            Intent it = new Intent(this, ThankyouActivity.class);
-            startActivity(it);
-        }
-    }
-
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager(), name, imageUri, liked); // username, email, age, occupation, description);
+        Adapter adapter = new Adapter(getSupportFragmentManager(), name, username, email, age, occupation, description);
         adapter.addFragment(new ProfileFragment(), "Profile");
         adapter.addFragment(new MatchesFragment(), "Matches");
         adapter.addFragment(new SettingsFragment(), "Settings");
@@ -88,17 +73,14 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public Adapter(FragmentManager manager, String na, String im, boolean lk) {
+        public Adapter(FragmentManager manager, String na, String us, String em, String ag, String oc, String de) {
             super(manager);
             name = na;
-            imageUri = im;
-            liked = lk;
-            //name = na;
-            //username = us;
-            //email = em;
-            //age = ag;
-            //occupation = oc;
-            //description = de;
+            username = us;
+            email = em;
+            age = ag;
+            occupation = oc;
+            description = de;
         }
 
         @Override
@@ -113,16 +95,12 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
 
         public void addFragment(Fragment fragment, String title) {
             Bundle bundle = new Bundle();
-
             bundle.putString("name", name);
-            bundle.putString("imageUri", imageUri);
-            bundle.putBoolean("liked", false);
-            //bundle.putString("name", name);
-            //bundle.putString("username", username);
-            //bundle.putString("email", email);
-            //bundle.putString("age", age);
-            //bundle.putString("occupation", occupation);
-            //bundle.putString("description", description);
+            bundle.putString("username", username);
+            bundle.putString("email", email);
+            bundle.putString("age", age);
+            bundle.putString("occupation", occupation);
+            bundle.putString("description", description);
             fragment.setArguments(bundle);
 
             mFragmentList.add(fragment);

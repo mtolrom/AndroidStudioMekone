@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mekonetolrom.homework_week1.MatchesFragment.OnListFragmentInteractionListener;
-import com.mekonetolrom.homework_week1.MatchesItem;
-import com.mekonetolrom.homework_week1.FirebaseMatchesViewModel;
-import com.mekonetolrom.homework_week1.FirebaseMatchesModel;
-
 import java.util.List;
 import android.support.v7.util.DiffUtil;
 

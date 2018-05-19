@@ -90,8 +90,7 @@ public class MatchesFragment extends Fragment {
     }
 
     public void addMatchesItem(View view) {
-        //String name = newMatchesItemText.getText().toString();
-        //String imageUri = newMatchesItemText.getText().toString();
+        String title = newMatchesItemText.getText().toString();
         MatchesItem item = new MatchesItem(name, imageUri, false);
         viewModel.addMatchesItem(item);
     }
