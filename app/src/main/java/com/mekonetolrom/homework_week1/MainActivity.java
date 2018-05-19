@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
     private String button_text;
     private TextView textView, textUsername, textEmail, textAge, textOccupation, textDescription;
     private static String name, username, email, age, occupation, description;
-    //private static boolean liked;
-    //private static MatchesItem mItem;
     private FragmentManager manager;
     private FirebaseMatchesViewModel viewModel;
 
@@ -42,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        Bundle b = new Bundle();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
 
             assert b != null;
             if (b != null) {

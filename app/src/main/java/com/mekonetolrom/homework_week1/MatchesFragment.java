@@ -13,6 +13,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,8 @@ public class MatchesFragment extends Fragment {
     private static boolean liked;
     private FragmentManager manager;
     private MyMatchesItemRecyclerViewAdapter myMatchesItemRecyclerViewAdapter;
+
+    private static final String TAG = MatchesFragment.class.getSimpleName();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -80,11 +83,14 @@ public class MatchesFragment extends Fragment {
             this.myMatchesItemRecyclerViewAdapter = new MyMatchesItemRecyclerViewAdapter(mDataSet, mListener);
             recyclerView.setAdapter(myMatchesItemRecyclerViewAdapter);
 
+            viewModel = new FirebaseMatchesViewModel();
             viewModel.getMatchesItems(
                     (ArrayList<MatchesItem> matchesItem) -> {
                         myMatchesItemRecyclerViewAdapter.updateMatchesListItems(matchesItem);
+                        mDataSet = matchesItem;
                     }
             );
+            Log.e(TAG, "onCreateView()");
         }
         return view;
     }
@@ -103,7 +109,7 @@ public class MatchesFragment extends Fragment {
 
     @Override
     public void onPause() {
-        viewModel.clear();
+        //viewModel.clear();
         super.onPause();
     }
 
