@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchesDiffCallback extends DiffUtil.Callback  {
-    private final List<MatchesItem> mOldMatchesList;
-    private final List<MatchesItem> mNewMatchesList;
+    private final List<Matches> mOldMatchesList;
+    private final List<Matches> mNewMatchesList;
 
-    public MatchesDiffCallback(List<MatchesItem> oldMatchesList, List<MatchesItem> newMatchesList) {
+    public MatchesDiffCallback(List<Matches> oldMatchesList, List<Matches> newMatchesList) {
         this.mOldMatchesList = oldMatchesList;
         this.mNewMatchesList = newMatchesList;
     }
@@ -31,8 +31,8 @@ public class MatchesDiffCallback extends DiffUtil.Callback  {
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        final MatchesItem oldMatches = mOldMatchesList.get(oldItemPosition);
-        final MatchesItem newMatches = mNewMatchesList.get(newItemPosition);
+        final Matches oldMatches = mOldMatchesList.get(oldItemPosition);
+        final Matches newMatches = mNewMatchesList.get(newItemPosition);
 
         return oldMatches.name.equals(newMatches.name);
     }

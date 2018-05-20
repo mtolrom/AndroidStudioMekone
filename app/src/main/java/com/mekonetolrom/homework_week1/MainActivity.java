@@ -9,8 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,9 +23,9 @@ public class MainActivity extends AppCompatActivity implements MatchesFragment.O
     private FirebaseMatchesViewModel viewModel;
 
     @Override
-    public void onListFragmentInteraction(MatchesItem item) {
-        item.liked = true;
-        viewModel.updateMatchesItem(item);
+    public void onListFragmentInteraction(Matches item) {
+        //item.liked = true;
+        //viewModel.updateMatchesItem(item);
     }
 
     @Override

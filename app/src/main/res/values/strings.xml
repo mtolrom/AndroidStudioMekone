@@ -39,6 +39,7 @@
     <string name="r_email">Email : mtolrom@outlook.com</string>
     <string name="r_occupation">Occupation : Engineer</string>
     <string name="r_description">Description : Cloud Computing Engineer</string>
+    <string name="matches_ryan_gosling">Ryan Gosling</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

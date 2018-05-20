@@ -1,16 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
+    android:paddingTop="30dp"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_centerInParent="true">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/id_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/edit_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/font_size"
-        android:text="Settings" />
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_name" />
 
+    <TextView
+        android:id="@+id/id_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_name" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/edit_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_username"
+        android:layout_toEndOf="@+id/id_username"
+        android:layout_alignTop="@+id/id_username" />
+
+    <TextView
+        android:id="@+id/id_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_username" />
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_email"
+        android:layout_toEndOf="@+id/id_email"
+        android:layout_alignTop="@+id/id_email" />
+
+    <TextView
+        android:id="@+id/id_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age (mm/dd/yyyy)"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_email" />
+
+    <EditText
+        android:id="@+id/edit_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:text=""
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_age"
+        android:layout_toEndOf="@+id/id_age"
+        android:layout_alignTop="@+id/id_age" />
+
+    <TextView
+        android:id="@+id/id_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Occupation"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_age" />
+
+    <EditText
+        android:id="@+id/edit_occupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_occupation"
+        android:layout_toEndOf="@+id/id_occupation"
+        android:layout_alignTop="@+id/id_occupation" />
+
+    <TextView
+        android:id="@+id/id_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="18dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_occupation" />
+
+    <EditText
+        android:id="@+id/edit_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/id_description"
+        android:layout_toEndOf="@+id/id_description"
+        android:layout_alignTop="@+id/id_description" />
+
+    <TextView
+        android:id="@+id/error_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_description" />
+
+    <Button
+        android:id="@+id/id_submit"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="createAccount"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/error_status" />
+
+    <TextView
+        android:id="@+id/id_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tolrom, Mekone 4/19/2018"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:layout_below="@id/id_submit" />
+
+</RelativeLayout>

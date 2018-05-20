@@ -1,6 +1,7 @@
 package com.mekonetolrom.homework_week1;
 
-import com.mekonetolrom.homework_week1.MatchesItem;
+import android.annotation.TargetApi;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +13,6 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 
 public class FirebaseMatchesModel {
-
     private DatabaseReference mDatabase;
     private HashMap<DatabaseReference, ValueEventListener> listeners;
 
@@ -21,14 +21,10 @@ public class FirebaseMatchesModel {
         listeners = new HashMap<>();
     }
 
-    public void addMatchesItem(MatchesItem item) {
-        DatabaseReference matchesItemsRef = mDatabase.child("matchesItem");
-        matchesItemsRef.push().setValue(item);
-    }
-
-    public void getMatchesItems(Consumer<DataSnapshot> dataChangedCallback, Consumer<DatabaseError> dataErrorCallback) {
-        DatabaseReference matchesItemsRef = mDatabase.child("matchesItem");
-        ValueEventListener matchesItemsListener = new ValueEventListener() {
+    @TargetApi(24)
+    public void getMatches(Consumer<DataSnapshot> dataChangedCallback, Consumer<DatabaseError> dataErrorCallback) {
+        DatabaseReference matchesRef = mDatabase.child("matches");
+        ValueEventListener matchesListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataChangedCallback.accept(dataSnapshot);
@@ -39,15 +35,17 @@ public class FirebaseMatchesModel {
                 dataErrorCallback.accept(databaseError);
             }
         };
-        matchesItemsRef.addValueEventListener(matchesItemsListener);
-        listeners.put(matchesItemsRef, matchesItemsListener);
+
+        matchesRef.addValueEventListener(matchesListener);
+        listeners.put(matchesRef, matchesListener);
     }
 
-    public void updateMatchesItemById(MatchesItem item) {
-        DatabaseReference matchesItemsRef = mDatabase.child("matchesItem");
-        matchesItemsRef.child(item.uid).setValue(item);
+    public void updateMatchesById(Matches matches) {
+        DatabaseReference matchesRef = mDatabase.child("matches");
+        matchesRef.child(matches.uid).setValue(matches);
     }
 
+    @TargetApi(24)
     public void clear() {
         // Clear all the listeners onPause
         listeners.forEach(Query::removeEventListener);

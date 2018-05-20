@@ -1,42 +1,41 @@
 package com.mekonetolrom.homework_week1;
 
+import android.annotation.TargetApi;
+
 import com.mekonetolrom.homework_week1.FirebaseMatchesModel;
-import com.mekonetolrom.homework_week1.MatchesItem;
+import com.mekonetolrom.homework_week1.Matches;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class FirebaseMatchesViewModel {
-    private FirebaseMatchesModel matchesModel;
+
+    FirebaseMatchesModel matchesModel;
 
     public FirebaseMatchesViewModel() {
         matchesModel = new FirebaseMatchesModel();
     }
 
-    public void addMatchesItem(MatchesItem item) {
-        matchesModel.addMatchesItem(item);
-    }
-
-    public void getMatchesItems(Consumer<ArrayList<MatchesItem>> responseCallback) {
-        matchesModel.getMatchesItems(
+    @TargetApi(24)
+    public void getMatches(Consumer<ArrayList<Matches>> responseCallBack) {
+        matchesModel.getMatches(
                 (DataSnapshot dataSnapshot) -> {
-                    ArrayList<MatchesItem> matchesItems = new ArrayList<>();
-                    for (DataSnapshot matchesSnapshot : dataSnapshot.getChildren()) {
-                        MatchesItem item = matchesSnapshot.getValue(MatchesItem.class);
-                        assert item != null;
-                        item.uid = matchesSnapshot.getKey();
-                        matchesItems.add(item);
+                    ArrayList<Matches> matches = new ArrayList<>();
+                    for (DataSnapshot matchesSnapshot: dataSnapshot.getChildren()) {
+                        Matches itemMatches = matchesSnapshot.getValue(Matches.class);
+                        assert itemMatches != null;
+                        itemMatches.uid = matchesSnapshot.getKey();
+                        matches.add(itemMatches);
                     }
-                    responseCallback.accept(matchesItems);
+                    responseCallBack.accept(matches);
                 },
-                (databaseError -> System.out.println("Error reading MatchesItems: " + databaseError))
+                (databaseError -> System.out.println("Error reading matches items: " + databaseError))
         );
     }
 
-    public void updateMatchesItem(MatchesItem item) {
-        matchesModel.updateMatchesItemById(item);
+    public void updateMatchesItem(Matches matches) {
+        matchesModel.updateMatchesById(matches);
     }
 
     public void clear() {
