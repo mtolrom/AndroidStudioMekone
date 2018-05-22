@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="30dp"
+    android:paddingTop="7dp"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:gravity="center"
@@ -13,13 +13,16 @@
         android:id="@+id/id_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textSize="18dp"
-        android:padding="15dp"
+        android:text="Email"
+        android:textSize="15dp"
+        android:paddingTop="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
         android:layout_alignParentLeft="true" />
 
     <EditText
-        android:id="@+id/edit_name"
+        android:id="@+id/edit_st_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -31,16 +34,16 @@
         android:id="@+id/id_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
-        android:textSize="18dp"
+        android:text="Min Distance"
+        android:textSize="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_name" />
 
     <EditText
-        android:id="@+id/edit_username"
+        android:id="@+id/edit_st_mindistance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/id_username"
@@ -51,16 +54,16 @@
         android:id="@+id/id_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="18dp"
+        android:text="Max Distance"
+        android:textSize="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_username" />
 
     <EditText
-        android:id="@+id/edit_email"
+        android:id="@+id/edit_st_maxdistance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/id_email"
@@ -71,16 +74,16 @@
         android:id="@+id/id_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age (mm/dd/yyyy)"
-        android:textSize="18dp"
+        android:text="Min Age"
+        android:textSize="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_email" />
 
     <EditText
-        android:id="@+id/edit_age"
+        android:id="@+id/edit_st_minage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="number"
         android:text=""
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
@@ -92,16 +95,16 @@
         android:id="@+id/id_occupation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Occupation"
-        android:textSize="18dp"
+        android:text="Max Age"
+        android:textSize="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_age" />
 
     <EditText
-        android:id="@+id/edit_occupation"
+        android:id="@+id/edit_st_maxage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/id_occupation"
@@ -112,17 +115,15 @@
         android:id="@+id/id_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="18dp"
+        android:text="PhotoUrl"
+        android:textSize="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_occupation" />
 
     <EditText
-        android:id="@+id/edit_description"
+        android:id="@+id/edit_st_photourl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:lines="3"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/id_description"
@@ -130,38 +131,72 @@
         android:layout_alignTop="@+id/id_description" />
 
     <TextView
-        android:id="@+id/error_status"
+        android:id="@+id/st_mf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Message"
-        android:layout_centerHorizontal="true"
+        android:text="Sex (M or F)"
         android:textSize="15dp"
-        android:layout_marginTop="15dp"
         android:padding="15dp"
         android:layout_below="@id/id_description" />
 
+    <EditText
+        android:id="@+id/st_malefemale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/st_mf"
+        android:layout_toEndOf="@+id/st_mf"
+        android:layout_alignTop="@+id/st_mf" />
+
+    <TextView
+        android:id="@+id/st_acct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acoount (Public or Private)"
+        android:textSize="15dp"
+        android:padding="15dp"
+        android:layout_below="@id/st_mf" />
+
+    <EditText
+        android:id="@+id/st_publicprivate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/st_acct"
+        android:layout_toEndOf="@+id/st_acct"
+        android:layout_alignTop="@+id/st_acct" />
+
+    <TextView
+        android:id="@+id/st_rmd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder"
+        android:textSize="15dp"
+        android:padding="15dp"
+        android:layout_below="@id/st_acct" />
+
+    <EditText
+        android:id="@+id/edit_st_dailyreminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:layout_toRightOf="@id/st_rmd"
+        android:layout_toEndOf="@+id/st_rmd"
+        android:layout_alignTop="@+id/st_rmd" />
+
     <Button
-        android:id="@+id/id_submit"
+        android:id="@+id/btnSettings"
         android:layout_width="fill_parent"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:onClick="createAccount"
+
         android:textSize="18dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_below="@+id/error_status" />
-
-    <TextView
-        android:id="@+id/id_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tolrom, Mekone 4/19/2018"
-        android:layout_centerHorizontal="true"
-        android:textSize="15dp"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
-        android:layout_below="@id/id_submit" />
+        android:layout_below="@+id/st_rmd" />
 
 </RelativeLayout>
