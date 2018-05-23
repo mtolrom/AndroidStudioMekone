@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -77,16 +78,18 @@ public class MainActivityTest {
         //onView(withText("You liked")).inRoot(new ToastMatcher())
                 //.check(matches(isDisplayed()));
         onView(withId(R.id.viewpager)).perform(swipeLeft());
-        /*onView(withId(R.id.edit_st_email))
-                .check(matches(withText("")));
-        onView(withId(R.id.st_malefemale))
-                .check(matches(withText("")));
-        onView(withId(R.id.st_publicprivate))
-                .check(matches(withText("")));*/
-        onView(withId(R.id.edit_st_email)).perform(typeText("mekone@yahoo.ca"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.st_malefemale)).perform(typeText("M"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.st_publicprivate)).perform(typeText("Public"), ViewActions.closeSoftKeyboard());
+
+        onView(withId(R.id.edit_st_email)).perform(clearText()).perform(typeText("mekone@yahoo.ca"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.st_malefemale)).perform(clearText()).perform(typeText("M"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.st_publicprivate)).perform(clearText()).perform(typeText("Public"), ViewActions.closeSoftKeyboard());
         onView(withIndex(withId(R.id.btnSettings), 0)).perform(click());
+
+        onView(withId(R.id.edit_st_email))
+                .check(matches(withText("mekone@yahoo.ca")));
+        onView(withId(R.id.st_malefemale))
+                .check(matches(withText("M")));
+        onView(withId(R.id.st_publicprivate))
+                .check(matches(withText("Public")));
     }
 
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
