@@ -1,11 +1,8 @@
 package com.mekonetolrom.homework_week1;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.mekonetolrom.homework_week1.SettingsDao;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -79,16 +74,15 @@ public class SettingsFragment extends Fragment {
                 emls[0] = edit_email.getText().toString();
                 List<Setting> setts = new ArrayList<Setting>();
                 setts = loadAllByIds(db, emls);
-                //new GetSettingTask(getActivity(), edit_email.getText().toString()).execute();
 
-                boolean b = false;
+                boolean isValid = false;
                 if (edit_email.getText().toString() != null && !edit_email.getText().toString().isEmpty() && edit_maleFemale.getText().toString() != null && !edit_maleFemale.getText().toString().isEmpty() && edit_accountStatus.getText().toString() != null && !edit_accountStatus.getText().toString().isEmpty()) {
-                    b = true;
+                    isValid = true;
                 }
 
                 if (setts.size() == 0) {
                     //insert
-                    if (b) {
+                    if (isValid) {
                         if (edit_maleFemale.getText().toString().toLowerCase() != "f" || edit_maleFemale.getText().toString().toLowerCase() != "m") {
                             if (edit_accountStatus.getText().toString().toLowerCase() != "public" || edit_accountStatus.getText().toString().toLowerCase() != "private") {
                                 insertDatabase(getView(), setting);
@@ -100,7 +94,7 @@ public class SettingsFragment extends Fragment {
                     }
                 }else{
                     //update
-                    if (b) {
+                    if (isValid) {
                         if (edit_maleFemale.getText().toString().toLowerCase() != "f" || edit_maleFemale.getText().toString().toLowerCase() != "m") {
                             if (edit_accountStatus.getText().toString().toLowerCase() != "public" || edit_accountStatus.getText().toString().toLowerCase() != "private") {
                                 updateDatabase(getView(), setting);
@@ -114,8 +108,6 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        //List<Setting> settings = new ArrayList<Setting>();
-        //settings = getAll(db);
         new GetSettingTask(getActivity()).execute();
 
         return v;
@@ -180,11 +172,9 @@ public class SettingsFragment extends Fragment {
     private static class GetSettingTask extends AsyncTask<Void, Void, Setting> {
 
         private WeakReference<Activity> weakActivity;
-        //private String userEmail;
 
         public GetSettingTask(Activity activity) {
             weakActivity = new WeakReference<>(activity);
-            //this.userEmail = userEmail;
         }
 
         @Override
@@ -195,8 +185,6 @@ public class SettingsFragment extends Fragment {
             }
 
             AppDatabase db = AppDatabase.getAppDatabase(activity.getApplicationContext());
-            //String[] emails = {userEmail};
-            //List<Setting> users = db.settingsDao().loadAllByIds(emails);
             List<Setting> users = db.settingsDao().getAll();
             if (users.size() <= 0 || users.get(0) == null) {
                 return null;
@@ -221,21 +209,6 @@ public class SettingsFragment extends Fragment {
             edit_photoUrl.setText(setting.getPhotoUrl());
         }
     }
-
-    //getById
-
-
-    /*
-    private static Setting insertAll(final AppDatabase db, Setting setting) {
-        db.settingsDao().insertAll(setting);
-        return setting;
-    }
-
-    private static List<Setting> getAll(final AppDatabase db) {
-        List<Setting> settings = db.settingsDao().getAll();
-        return settings;
-    }
-    */
 
     private static List<Setting> loadAllByIds(final AppDatabase db, String[] emails) {
         List<Setting> settings = db.settingsDao().loadAllByIds(emails);
