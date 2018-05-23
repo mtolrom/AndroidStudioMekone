@@ -2,6 +2,10 @@ package com.mekonetolrom.homework_week1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.test.espresso.ViewAssertion;
+import android.support.v7.widget.RecyclerView;
+
+import org.hamcrest.Matcher;
 
 public class Matches implements Parcelable  {
     public String imageUrl;

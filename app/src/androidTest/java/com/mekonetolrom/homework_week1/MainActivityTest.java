@@ -130,4 +130,15 @@ public class MainActivityTest {
             return false;
         }
     }
+
+    @Test
+    public void testMatches() {
+        MatchesFragment fragment = new MatchesFragment();
+        activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.viewpager, fragment).commit();
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withIndex(withId(R.id.card_image), 0)).check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.card_image), 1)).check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.card_image), 1)).check(matches(isDisplayed()));
+    }
 }
