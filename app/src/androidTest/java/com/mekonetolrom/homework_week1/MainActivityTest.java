@@ -26,6 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 import static android.support.test.espresso.matcher.ViewMatchers.withChild;
 import android.support.test.espresso.matcher.ViewMatchers;
+import static org.hamcrest.Matchers.allOf;
 import android.view.WindowManager;
 
 
@@ -57,17 +58,31 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testMatchesFragment() {
+        ProfileFragment fragment = new ProfileFragment();
+        activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.viewpager, fragment).commit();
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withIndex(withId(R.id.card_image), 0)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testSettingsFragment() {
         ProfileFragment fragment = new ProfileFragment();
         activityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.viewpager, fragment).commit();
         onView(withId(R.id.viewpager)).perform(swipeLeft());
+
         onView(withIndex(withId(R.id.favorite_button), 0)).perform(click());
         //onView(withText("You liked")).inRoot(new ToastMatcher())
                 //.check(matches(isDisplayed()));
         onView(withId(R.id.viewpager)).perform(swipeLeft());
-        onView(withId(R.id.edit_st_email))
+        /*onView(withId(R.id.edit_st_email))
                 .check(matches(withText("")));
+        onView(withId(R.id.st_malefemale))
+                .check(matches(withText("")));
+        onView(withId(R.id.st_publicprivate))
+                .check(matches(withText("")));*/
         onView(withId(R.id.edit_st_email)).perform(typeText("mekone@yahoo.ca"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.st_malefemale)).perform(typeText("M"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.st_publicprivate)).perform(typeText("Public"), ViewActions.closeSoftKeyboard());
