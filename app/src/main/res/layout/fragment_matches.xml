@@ -32,6 +32,39 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/tv_lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/card_title"
+            android:textColor="?attr/colorPrimary"
+            android:text="Action" />
+
+        <TextView
+            android:id="@+id/tv_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_lat"
+            android:textColor="?attr/colorPrimary"
+            android:text="Action2" />
+
+        <TextView
+            android:id="@+id/tv_Lat_valueGPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_long"
+            android:textColor="?attr/colorPrimary"
+            android:text="GPS Lat" />
+
+        <TextView
+            android:id="@+id/tv_Long_valueGPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Lat_valueGPS"
+            android:textColor="?attr/colorPrimary"
+            android:text="GPS Long" />
+
         <ImageButton
             android:id="@+id/favorite_button"
             android:clickable="true"

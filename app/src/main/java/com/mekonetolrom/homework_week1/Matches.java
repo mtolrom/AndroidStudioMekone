@@ -12,6 +12,8 @@ public class Matches implements Parcelable  {
     public boolean liked;
     public String name;
     public String uid;
+    public String lat;
+    public String longitude;
 
     public Matches() {
         //Default constructor required
@@ -21,6 +23,8 @@ public class Matches implements Parcelable  {
         imageUrl = in.readString();
         liked = in.readByte() != 0;
         name = in.readString();
+        lat = in.readString();
+        longitude = in.readString();
     }
 
     public static final Creator<Matches> CREATOR = new Creator<Matches>() {
@@ -47,5 +51,7 @@ public class Matches implements Parcelable  {
         dest.writeString(imageUrl);
         dest.writeByte((byte) (liked ? 1 : 0));
         dest.writeString(name);
+        dest.writeString(lat);
+        dest.writeString(longitude);
     }
 }

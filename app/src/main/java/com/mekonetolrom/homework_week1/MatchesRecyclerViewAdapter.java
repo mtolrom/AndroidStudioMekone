@@ -40,6 +40,8 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
         holder.mMatches = mValues.get(position);
         Picasso.get().load(mValues.get(position).imageUrl).into(holder.mImageView);
         holder.mTitleView.setText(mValues.get(position).name);
+        holder.mLat.setText("Latitude : " + mValues.get(position).lat);
+        holder.mLong.setText("Longitude : " + mValues.get(position).longitude);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,8 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
         public final View mView;
         public final ImageView mImageView;
         public final TextView mTitleView;
+        public final TextView mLat;
+        public final TextView mLong;
         public Matches mMatches;
 
         public ViewHolder(View view) {
@@ -72,6 +76,8 @@ public class MatchesRecyclerViewAdapter extends RecyclerView.Adapter<MatchesRecy
             mView = view;
             mImageView = view.findViewById(R.id.card_image);
             mTitleView = view.findViewById(R.id.card_title);
+            mLat = view.findViewById(R.id.tv_lat);
+            mLong = view.findViewById(R.id.tv_long);
 
             ImageButton favoriteImageButton = itemView.findViewById(R.id.favorite_button);
             favoriteImageButton.setOnClickListener(new View.OnClickListener() {
