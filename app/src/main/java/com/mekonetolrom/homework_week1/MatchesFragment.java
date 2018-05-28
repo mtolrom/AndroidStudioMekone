@@ -60,8 +60,8 @@ public class MatchesFragment extends Fragment {
         longitudeValueGPS = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
         latitudeValueGPS = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
 
-        //longitudeValueNetwork = (TextView) findViewById(R.id.longitudeValueNetwork);
-        //latitudeValueNetwork = (TextView) findViewById(R.id.latitudeValueNetwork);
+        longitudeValueNetwork = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
+        latitudeValueNetwork = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
 
         viewModel = new FirebaseMatchesViewModel();
         matchesRecyclerViewAdapter = new MatchesRecyclerViewAdapter(mDataSet, mListener);
@@ -125,83 +125,49 @@ public class MatchesFragment extends Fragment {
     public void toggleGPSUpdates(View view) {
         if (!checkLocation())
             return;
-        Button button = (Button) view;
-        if (button.getText().equals(getResources().getString(R.string.pause))) {
-            locationManager.removeUpdates(locationListenerGPS);
-            button.setText(R.string.resume);
-        } else {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, 2 * 60 * 1000, 10, locationListenerGPS);
-            button.setText(R.string.pause);
+        //locationManager.removeUpdates(locationListenerGPS);
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 2 * 60 * 1000, 10, locationListenerGPS);
     }
 
     public void toggleBestUpdates(View view) {
         if (!checkLocation())
             return;
-        Button button = (Button) view;
-        if (button.getText().equals(getResources().getString(R.string.pause))) {
-            locationManager.removeUpdates(locationListenerBest);
-            button.setText(R.string.resume);
-        } else {
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
-            criteria.setAltitudeRequired(false);
-            criteria.setBearingRequired(false);
-            criteria.setCostAllowed(true);
-            criteria.setPowerRequirement(Criteria.POWER_LOW);
-            String provider = locationManager.getBestProvider(criteria, true);
-            if (provider != null) {
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                locationManager.requestLocationUpdates(provider, 2 * 60 * 1000, 10, locationListenerBest);
-                button.setText(R.string.pause);
-                Toast.makeText(getContext(), "Best Provider is " + provider, Toast.LENGTH_LONG).show();
+        //locationManager.removeUpdates(locationListenerBest);
+        //Button button = (Button) view;
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        String provider = locationManager.getBestProvider(criteria, true);
+        if (provider != null) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
             }
+            locationManager.requestLocationUpdates(provider, 2 * 60 * 1000, 10, locationListenerBest);
+            Toast.makeText(getContext(), "Best Provider is " + provider, Toast.LENGTH_LONG).show();
         }
     }
 
     public void toggleNetworkUpdates(View view) {
         if (!checkLocation())
             return;
-        Button button = (Button) view;
-        if (button.getText().equals(getResources().getString(R.string.pause))) {
-            locationManager.removeUpdates(locationListenerNetwork);
-            button.setText(R.string.resume);
-        } else {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, 60 * 1000, 10, locationListenerNetwork);
-            Toast.makeText(getContext(), "Network provider started running", Toast.LENGTH_LONG).show();
-            button.setText(R.string.pause);
+        //locationManager.removeUpdates(locationListenerNetwork);
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
+        locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER, 60 * 1000, 10, locationListenerNetwork);
+        Toast.makeText(getContext(), "Network provider started running", Toast.LENGTH_LONG).show();
     }
 
     private final LocationListener locationListenerBest = new LocationListener() {
