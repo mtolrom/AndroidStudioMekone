@@ -55,6 +55,8 @@ public class MatchesFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
 
+        //locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
         longitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
         latitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
         longitudeValueGPS = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
@@ -83,6 +85,10 @@ public class MatchesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        toggleGPSUpdates(getView());
+        toggleBestUpdates(getView());
+        toggleNetworkUpdates(getView());
 
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
@@ -118,8 +124,11 @@ public class MatchesFragment extends Fragment {
     }
 
     private boolean isLocationEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if(locationManager != null) {
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }
+        return false;
     }
 
     public void toggleGPSUpdates(View view) {
@@ -162,7 +171,9 @@ public class MatchesFragment extends Fragment {
         if (!checkLocation())
             return;
         //locationManager.removeUpdates(locationListenerNetwork);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         locationManager.requestLocationUpdates(
