@@ -55,7 +55,10 @@ public class MatchesFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
 
-        //locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        toggleGPSUpdates(getView());
+        toggleBestUpdates(getView());
+        toggleNetworkUpdates(getView());
 
         longitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
         latitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
@@ -86,11 +89,7 @@ public class MatchesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        toggleGPSUpdates(getView());
-        toggleBestUpdates(getView());
-        toggleNetworkUpdates(getView());
 
-        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
         if (getArguments() != null) {
             mDataSet = getArguments().getParcelableArrayList(ARG_DATA_SET);
@@ -192,7 +191,7 @@ public class MatchesFragment extends Fragment {
                     public void run() {
                         longitudeValueBest.setText(longitudeBest + "");
                         latitudeValueBest.setText(latitudeBest + "");
-                        Toast.makeText(getContext(), "Best Provider update", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Best Provider update", Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Throwable throwable) {
@@ -227,7 +226,7 @@ public class MatchesFragment extends Fragment {
                     public void run() {
                         longitudeValueNetwork.setText(longitudeNetwork + "");
                         latitudeValueNetwork.setText(latitudeNetwork + "");
-                        Toast.makeText(getContext(), "Network Provider update", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Network Provider update", Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Throwable throwable) {
@@ -262,7 +261,7 @@ public class MatchesFragment extends Fragment {
                     public void run() {
                         longitudeValueBest.setText(longitudeGPS + "");
                         latitudeValueGPS.setText(latitudeGPS + "");
-                        Toast.makeText(getContext(), "GPS Provider update", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "GPS Provider update", Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Throwable throwable) {
