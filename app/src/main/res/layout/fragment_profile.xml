@@ -6,6 +6,15 @@
     android:paddingTop="30dp"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="30dp"
+        android:paddingLeft="50dp"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_greeting"
         android:layout_width="wrap_content"

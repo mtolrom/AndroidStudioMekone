@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
@@ -44,15 +46,21 @@ public class ProfileFragment extends Fragment {
             ageParam = getArguments().getString("age");
             occupationParam = getArguments().getString("occupation");
             descriptionParam = getArguments().getString("description");
+
+            tvName.setText(nameParam);
+            tvUsername.setText(usernameParam);
+            tvEmail.setText(emailParam);
+            tvAge.setText(ageParam);
+            tvOccupation.setText(occupationParam);
+            tvDescription.setText(descriptionParam);
+        }
+        if(nameParam == "" || nameParam == null){
+            LinearLayout linearLayout1 = (LinearLayout) v.findViewById(R.id.linearLayout1);
+            ImageView image = new ImageView(getContext());
+            image.setBackgroundResource(R.drawable.wait);
+            linearLayout1.addView(image);
         }
 
-
-        tvName.setText(nameParam);
-        tvUsername.setText(usernameParam);
-        tvEmail.setText(emailParam);
-        tvAge.setText(ageParam);
-        tvOccupation.setText(occupationParam);
-        tvDescription.setText(descriptionParam);
 
         btn = (Button) v.findViewById(R.id.button2);
         btn.setOnClickListener(new View.OnClickListener() {
