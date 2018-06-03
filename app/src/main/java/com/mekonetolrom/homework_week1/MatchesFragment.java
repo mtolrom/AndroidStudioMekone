@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static android.support.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
 
@@ -39,13 +40,7 @@ public class MatchesFragment extends Fragment {
     private MatchesRecyclerViewAdapter matchesRecyclerViewAdapter;
 
     LocationManager locationManager;
-    double longitudeBest, latitudeBest;
     double longitudeGPS, latitudeGPS;
-    double longitudeNetwork, latitudeNetwork;
-    TextView longitudeValueBest, latitudeValueBest;
-    TextView longitudeValueGPS, latitudeValueGPS;
-    TextView longitudeValueNetwork, latitudeValueNetwork;
-
 
     @Nullable
     @Override
@@ -57,16 +52,6 @@ public class MatchesFragment extends Fragment {
 
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         toggleGPSUpdates(getView());
-        toggleBestUpdates(getView());
-        toggleNetworkUpdates(getView());
-
-        longitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
-        latitudeValueBest = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
-        longitudeValueGPS = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
-        latitudeValueGPS = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
-
-        longitudeValueNetwork = (TextView) recyclerView.findViewById(R.id.tv_Long_valueGPS);
-        latitudeValueNetwork = (TextView) recyclerView.findViewById(R.id.tv_Lat_valueGPS);
 
         viewModel = new FirebaseMatchesViewModel();
         matchesRecyclerViewAdapter = new MatchesRecyclerViewAdapter(mDataSet, mListener);
@@ -75,6 +60,7 @@ public class MatchesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         viewModel.getMatches(
                 (ArrayList<Matches> matchesList) -> {
                     matchesRecyclerViewAdapter.updateMatchListItems(matchesList);
@@ -82,19 +68,18 @@ public class MatchesFragment extends Fragment {
         );
 
         return recyclerView;
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         if (getArguments() != null) {
             mDataSet = getArguments().getParcelableArrayList(ARG_DATA_SET);
         }
+
     }
+
 
     private boolean checkLocation() {
         if (!isLocationEnabled())
@@ -124,8 +109,7 @@ public class MatchesFragment extends Fragment {
 
     private boolean isLocationEnabled() {
         if(locationManager != null) {
-            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         }
         return false;
     }
@@ -143,113 +127,6 @@ public class MatchesFragment extends Fragment {
                 LocationManager.GPS_PROVIDER, 2 * 60 * 1000, 10, locationListenerGPS);
     }
 
-    public void toggleBestUpdates(View view) {
-        if (!checkLocation())
-            return;
-        //locationManager.removeUpdates(locationListenerBest);
-        //Button button = (Button) view;
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        String provider = locationManager.getBestProvider(criteria, true);
-        if (provider != null) {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            locationManager.requestLocationUpdates(provider, 2 * 60 * 1000, 10, locationListenerBest);
-            Toast.makeText(getContext(), "Best Provider is " + provider, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void toggleNetworkUpdates(View view) {
-        if (!checkLocation())
-            return;
-        //locationManager.removeUpdates(locationListenerNetwork);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 60 * 1000, 10, locationListenerNetwork);
-        Toast.makeText(getContext(), "Network provider started running", Toast.LENGTH_LONG).show();
-    }
-
-    private final LocationListener locationListenerBest = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            longitudeBest = location.getLongitude();
-            latitudeBest = location.getLatitude();
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        longitudeValueBest.setText(longitudeBest + "");
-                        latitudeValueBest.setText(latitudeBest + "");
-                        Toast.makeText(getContext(), "Best Provider update", Toast.LENGTH_LONG).show();
-                    }
-                });
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
-
-    private final LocationListener locationListenerNetwork = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            longitudeNetwork = location.getLongitude();
-            latitudeNetwork = location.getLatitude();
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        longitudeValueNetwork.setText(longitudeNetwork + "");
-                        latitudeValueNetwork.setText(latitudeNetwork + "");
-                        Toast.makeText(getContext(), "Network Provider update", Toast.LENGTH_LONG).show();
-                    }
-                });
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
-
     private final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(Location location) {
             longitudeGPS = location.getLongitude();
@@ -259,9 +136,7 @@ public class MatchesFragment extends Fragment {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        longitudeValueBest.setText(longitudeGPS + "");
-                        latitudeValueGPS.setText(latitudeGPS + "");
-                        Toast.makeText(getContext(), "GPS Provider update", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "lt = " + latitudeGPS + "\nlg = " + longitudeGPS, Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Throwable throwable) {
@@ -273,19 +148,15 @@ public class MatchesFragment extends Fragment {
         public void onStatusChanged(String s, int i, Bundle bundle) {
 
         }
-
         @Override
         public void onProviderEnabled(String s) {
 
         }
-
         @Override
         public void onProviderDisabled(String s) {
 
         }
     };
-
-
 
     @Override
     public void onAttach(Context context) {
@@ -304,17 +175,28 @@ public class MatchesFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Matches matches);
+    }
+
+    private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        if (unit == 'K') {
+            dist = dist * 1.609344;
+        } else if (unit == 'N') {
+            dist = dist * 0.8684;
+        }
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 }

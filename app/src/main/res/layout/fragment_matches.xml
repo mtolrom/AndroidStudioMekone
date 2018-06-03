@@ -49,21 +49,6 @@
             android:textColor="?attr/colorPrimary"
             android:text="Action2" />
 
-        <TextView
-            android:id="@+id/tv_Lat_valueGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_long"
-            android:textColor="?attr/colorPrimary"
-            android:text="GPS Lat" />
-
-        <TextView
-            android:id="@+id/tv_Long_valueGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_Lat_valueGPS"
-            android:textColor="?attr/colorPrimary"
-            android:text="GPS Long" />
 
         <ImageButton
             android:id="@+id/favorite_button"
